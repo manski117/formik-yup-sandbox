@@ -28,15 +28,20 @@ export const basicSchema = yup.object().shape({
 //entering them on new lines make them more readable and does not add spaces.
 //same as still saying yup.method().method()
 
+
+
 export const advancedSchema = yup.object().shape({
     username: yup
     .string()
     .min(3, 'Username must be at least 3 characters long')
     .required("Required"),
-    jobType: yup.string()
+    jobType: yup
+    .string()
     .oneOf(['designer', 'developer', 'manager', 'other'], "Invalid Job Type" )
     .required("Required"),
-    acceptTos: yup
+    acceptedTos: yup
     .boolean()
     .oneOf([true], "You must accept the terms of service"),
 })
+
+

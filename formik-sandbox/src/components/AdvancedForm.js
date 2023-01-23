@@ -36,8 +36,6 @@ const AdvancedForm = () => {
       >
         {({isSubmitting}) => (
           <Form>
-            <Field type='text' name='name' placeholder='Dont use this one'></Field>
-            {/* however, you cannot add class names to this. For that we need custom fields */}
             <CustomInput 
               label="Username"
               name='username'
