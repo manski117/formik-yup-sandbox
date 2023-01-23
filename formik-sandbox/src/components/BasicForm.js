@@ -11,7 +11,7 @@ const onSubmit = () =>{
 const BasicForm = () => {
   //any formik component must define 3 key props: initial values, validate, and onSubmit handler.
   //handleSubmit just calls onSubmit
-  const {values, errors, handleBlur, handleChange, handleSubmit} = useFormik({
+  const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
     initialValues: {
       email: '',
       age: '',
@@ -22,7 +22,7 @@ const BasicForm = () => {
     onSubmit,
   });
 
-  console.log(values, errors);
+  console.log(errors);
     return (
       <form onSubmit={handleSubmit} autoComplete="off">
         <label htmlFor="email">Email</label>
@@ -33,6 +33,7 @@ const BasicForm = () => {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur} 
+          className={errors.email && touched.email ? 'input-error' : ''}
          
         />
         <label htmlFor="age">Age</label>
@@ -43,6 +44,7 @@ const BasicForm = () => {
           value={values.age}
           onChange={handleChange}
           onBlur={handleBlur} 
+          className={errors.age && touched.age ? 'input-error' : ''}
         />
         <label htmlFor="password">Password</label>
         <input 
@@ -52,6 +54,7 @@ const BasicForm = () => {
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur} 
+          className={errors.password && touched.password ? 'input-error' : ''}
         />
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input 
@@ -61,6 +64,7 @@ const BasicForm = () => {
           value={values.confirmPassword}
           onChange={handleChange}
           onBlur={handleBlur} 
+          className={errors.confirmPassword && touched.confirmPassword ? 'input-error' : ''}
         />
         <button type="submit">Submit</button>
       </form>
