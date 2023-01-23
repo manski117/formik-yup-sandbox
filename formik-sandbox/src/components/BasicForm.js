@@ -1,3 +1,5 @@
+//This is the way you do things with the useFormik hook
+
 import React from 'react';
 import {useFormik} from 'formik'
 import { basicSchema } from '../schemas';
@@ -26,7 +28,7 @@ const BasicForm = () => {
     onSubmit,
   });
 
-  console.log(errors);
+  
     return (
       <form onSubmit={handleSubmit} autoComplete="off">
         <label htmlFor="email">Email</label>
