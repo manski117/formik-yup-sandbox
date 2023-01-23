@@ -94,3 +94,7 @@
   select.input-error{
     border-color: red;
   }
+
+  button:disabled{
+    opacity: .36;
+  }

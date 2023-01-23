@@ -3,15 +3,19 @@ import {useFormik} from 'formik'
 import { basicSchema } from '../schemas';
 
 //setup your custom onSubmit needs
-const onSubmit = () =>{
-  console.log('submitted');
+const onSubmit = async (values, actions) =>{
+  //timeout and disabled button CSS let user know info is being submitted
+  console.log(values);
+  console.log(actions);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  actions.resetForm();
 }
 
 //setup your formik component as a functional component
 const BasicForm = () => {
   //any formik component must define 3 key props: initial values, validate, and onSubmit handler.
   //handleSubmit just calls onSubmit
-  const {values, errors, touched, handleBlur, handleChange, handleSubmit} = useFormik({
+  const {values, errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting} = useFormik({
     initialValues: {
       email: '',
       age: '',
@@ -36,6 +40,8 @@ const BasicForm = () => {
           className={errors.email && touched.email ? 'input-error' : ''}
          
         />
+        {errors.email && touched.email && <p className='error'>{errors.email}</p>}
+
         <label htmlFor="age">Age</label>
         <input 
           id="age" 
@@ -46,6 +52,7 @@ const BasicForm = () => {
           onBlur={handleBlur} 
           className={errors.age && touched.age ? 'input-error' : ''}
         />
+        {errors.age && touched.age && <p className='error'>{errors.age}</p>}
         <label htmlFor="password">Password</label>
         <input 
           id="password" 
@@ -56,6 +63,7 @@ const BasicForm = () => {
           onBlur={handleBlur} 
           className={errors.password && touched.password ? 'input-error' : ''}
         />
+        {errors.password && touched.password && <p className='error'>{errors.password}</p>}
         <label htmlFor="confirmPassword">Confirm Password</label>
         <input 
           id="confirmPassword" 
@@ -66,7 +74,8 @@ const BasicForm = () => {
           onBlur={handleBlur} 
           className={errors.confirmPassword && touched.confirmPassword ? 'input-error' : ''}
         />
-        <button type="submit">Submit</button>
+        {errors.confirmPassword && touched.confirmPassword && <p className='error'>{errors.confirmPassword}</p>}
+        <button disabled={isSubmitting} type="submit">Submit</button>
       </form>
     );
   };
